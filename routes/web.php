@@ -4,12 +4,16 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Assets;
 use App\Models\Build;
+use App\Models\Dept;
 use App\Models\GuestView;
-use App\Models\AssetView;
+use App\Models\view_asset_list;
+use App\Models\view_build_list;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\GuestViewController;
 use App\Http\Controllers\BuildController;
 use App\Http\Controllers\AssetViewController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\BuildViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +35,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      */
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/build', 'BuildController@index')->name('home.build');
-
+    Route::get('/department', 'DepartmentController@index')->name('home.department');
+    Route::get('/about', 'AboutController@index')->name('home.about');
 
 
     Route::group(['middleware' => ['guest']], function() {
 
+        Route::get('/index','AssetViewController@show')->name('index');
 
         /**
          * Login Routes
@@ -48,8 +54,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['middleware' => ['auth']], function() {
 
-        // Route::get('/index','AssetViewController@show')->name('index');
-       Route::get('/index',[AssetViewController::class,'show']);
+        // Route::get('/',[AssetViewController::class,'show']);
+        // Route::get('/','AssetViewController@show')->name('index');
+        Route::get('/','AssetViewController@show')->name('index');
+        Route::get('/build','BuildViewController@show')->name('build');
+
 
         /**
          *
@@ -93,6 +102,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             $build->save();
 
             return redirect('/build')->with('success', 'Build Saved');
+        });
+
+        Route::post('/department',function(){
+            $dept = new Dept;
+            $dept->dept_name = request('dept_name');
+            $dept->details = request('details');
+
+            $dept->save();
+
+            return redirect('/department')->with('success', 'Department Saved');
         });
 
     });

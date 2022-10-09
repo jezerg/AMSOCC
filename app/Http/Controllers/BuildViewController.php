@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\view_asset_list;
+use App\Models\view_build_list;
 
-class AssetViewController extends Controller
+class BuildViewController extends Controller
 {
     public function show()
     {
         // $data = AssetView::all();
         // return view('index',['assetData'=>$data]);
-        $data = view_asset_list::all();
-        return view('home.index')->with('asset',$data);
+        $data = view_build_list::all();
+        return view('home.build')->with('build',$data);
     }
 }

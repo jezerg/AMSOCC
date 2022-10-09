@@ -37,6 +37,7 @@
 <body>
 
     @include('layouts.partials.navbar')
+    @include('layouts.partials.messages')
 
     <main class="container">
         @yield('content')

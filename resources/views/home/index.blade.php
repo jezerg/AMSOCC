@@ -3,6 +3,7 @@
 @section('content')
     <div class="bg-light p-5 rounded">
         @auth
+
         <h2>OCC Assets Management System</h2>
         <h3>Assets All List</h3>
         <!-- Button trigger modal -->
@@ -21,17 +22,18 @@
         <form action="/" method="POST">
             {{ csrf_field() }}
         <div class="modal-body">
+        @include('layouts.partials.messages')
                 <div class="mb-3">
                     <label>Asset Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter Asset Name">
+                    <input type="text" name="name" class="form-control" placeholder="Enter Asset Name" required="required" autofocus>
                 </div>
                 <div class="mb-3">
                     <label>Details</label>
-                    <input type="text" name="details" class="form-control" placeholder="Enter Details">
+                    <input type="text" name="details" class="form-control" placeholder="Enter Details" required="required">
                 </div>
                 <div class="mb-3">
                     <label>Serial Number</label>
-                    <input type="text" name="serial" class="form-control" placeholder="Enter Serial No.">
+                    <input type="text" name="serial" class="form-control" placeholder="Enter Serial No." required="required">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -57,7 +59,7 @@
                 </div>
                 <div class="mb-3">
                     <label>Quantity</label>
-                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity">
+                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" required="required">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -106,12 +108,13 @@
                 <th scope="col"> Quantity </th>
                 <th scope="col"> Build </th>
                 <th scope="col"> Department </th>
-                <th scope="col"> Created </th>
-                <th scope="col"> Updated </th>
+                <!-- <th scope="col"> Created </th> -->
+                <!-- <th scope="col"> Updated </th> -->
+                <th scope="col" style="width:25%"> ACTION</th>
             </tr>
             </thead>
-            @foreach($assetData as $assets)
             <tbody>
+            @foreach($asset as $assets)
             <tr>
                 <td>{{$assets['ID']}}</td>
                 <td>{{$assets['Name']}}</td>
@@ -122,17 +125,22 @@
                 <td>{{$assets['Quantity']}}</td>
                 <td>{{$assets['Build']}}</td>
                 <td>{{$assets['Department']}}</td>
-                <td>{{$assets['Created']}}</td>
-                <td>{{$assets['Updated']}}</td>
+                <!-- <td>{{$assets['Created']}}</td> -->
+                <!-- <td>{{$assets['Updated']}}</td> -->
+                <td>
+                    <a href="#" class="btn btn-success edit">EDIT</a>
+                    <a href="#" class="btn btn-danger delete">DELETE</a>
+                </td>
             </tr>
-            </tbody>
             @endforeach
+            </tbody>
             </table>
 
         @endauth
 
         @guest
         <h2>OCC Assets Management System</h2>
+        <h3>Assets All List</h3>
         <p class="lead">Please login to view the restricted data.</p>
         <br>
 

@@ -4,7 +4,7 @@
     <div class="bg-light p-5 rounded">
         @auth
         <h2>OCC Assets Management System</h2>
-        <h2>PC Build List</h3>
+        <h3>PC Build List</h3>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Add Build
@@ -23,15 +23,15 @@
         <div class="modal-body">
                 <div class="mb-3">
                     <label>Build Name</label>
-                    <input type="text" name="build_name" class="form-control" placeholder="Enter Build Name">
+                    <input type="text" name="build_name" class="form-control" placeholder="Enter Build Name" required="required" autofocus>
                 </div>
                 <div class="mb-3">
                     <label>Serial</label>
-                    <input type="text" name="serial" class="form-control" placeholder="Enter Serial No.">
+                    <input type="text" name="serial" class="form-control" placeholder="Enter Serial No." required="required">
                 </div>
                 <div class="mb-3">
                     <label>Details</label>
-                    <input type="text" name="details" class="form-control" placeholder="Enter Details">
+                    <input type="text" name="details" class="form-control" placeholder="Enter Details" required="required">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -65,11 +65,43 @@
         </div>
         </div>
         </div>
+        <br><br>
+
+        <table id="datatable" class="table table-dark table-hover" style="width:100%">
+          <thead>
+            <tr>
+                <th scope="col"> ID </th>
+                <th scope="col"> Name </th>
+                <th scope="col"> Serial </th>
+                <th scope="col"> Details </th>
+                <th scope="col"> Status </th>
+                <th scope="col"> Department </th>
+                <th scope="col" style="width:25%"> ACTION</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($build as $assets)
+            <tr>
+                <td>{{$assets['ID']}}</td>
+                <td>{{$assets['Name']}}</td>
+                <td>{{$assets['Serial']}}</td>
+                <td>{{$assets['Details']}}</td>
+                <td>{{$assets['Status']}}</td>
+                <td>{{$assets['Department']}}</td>
+                <td>
+                    <a href="#" class="btn btn-success edit">EDIT</a>
+                    <a href="#" class="btn btn-danger delete">DELETE</a>
+                </td>
+            </tr>
+            @endforeach
+            </tbody>
+            </table>
 
         @endauth
 
         @guest
         <h2>OCC Assets Management System</h2>
+        <h3>PC Build List</h3>
         <p class="lead">Please login to view the restricted data.</p>
         <br>
 
