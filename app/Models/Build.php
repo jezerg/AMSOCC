@@ -13,6 +13,7 @@ class Build extends Model
         'serial',
         'details',
         'status_id',
-        'dept_id'
+        'dept_id',
+        'updated_at'
     ];
 }

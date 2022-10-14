@@ -11,7 +11,7 @@ class BuildViewController extends Controller
     {
         // $data = AssetView::all();
         // return view('index',['assetData'=>$data]);
-        $data = view_build_list::all();
-        return view('home.build')->with('build',$data);
+        // $data = view_build_list::all();
+        // return view('home.build')->with('build',$data);
     }
 }

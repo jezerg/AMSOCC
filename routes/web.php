@@ -14,6 +14,7 @@ use App\Http\Controllers\BuildController;
 use App\Http\Controllers\AssetViewController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BuildViewController;
+use App\Http\Controllers\DeptViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/asset', 'BuildController@index')->name('home.asset');
     Route::get('/build', 'BuildController@index')->name('home.build');
     Route::get('/department', 'DepartmentController@index')->name('home.department');
     Route::get('/about', 'AboutController@index')->name('home.about');
@@ -41,7 +43,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['middleware' => ['guest']], function() {
 
-        Route::get('/index','AssetViewController@show')->name('index');
+        // Route::get('/asset','AssetController@index')->name('asset');
 
         /**
          * Login Routes
@@ -55,10 +57,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::group(['middleware' => ['auth']], function() {
 
         // Route::get('/',[AssetViewController::class,'show']);
-        // Route::get('/','AssetViewController@show')->name('index');
-        Route::get('/','AssetViewController@show')->name('index');
-        Route::get('/build','BuildViewController@show')->name('build');
+        // Route::get('/',[AssetController::class, 'index']);
+        // Route::resource('/index','AssetController::class');
+        // Route::post('/index',[AssetController::class, 'index']);
+        // Route::get('/asset','AssetController@index')->name('asset');
+        Route::get('/build','BuildController@index')->name('build');
+        Route::get('/department','DepartmentController@index')->name('Department');
 
+        Route::resource('/asset',AssetController::class);
+        Route::resource('/build',BuildController::class);
+        Route::resource('/department',DepartmentController::class);
 
         /**
          *
@@ -75,7 +83,15 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
 
 
-        Route::post('/',function(){
+
+
+
+
+
+
+
+
+        Route::post('/asset',function(){
             $asset = new Assets;
             $asset->name = request('name');
             $asset->details = request('details');
@@ -88,7 +104,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
             $asset->save();
 
-            return redirect('/')->with('success', 'Asset Saved');
+            return redirect('/asset')->with('success', 'Asset Saved');
         });
 
         Route::post('/build',function(){

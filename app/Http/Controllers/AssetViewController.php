@@ -11,7 +11,7 @@ class AssetViewController extends Controller
     {
         // $data = AssetView::all();
         // return view('index',['assetData'=>$data]);
-        $data = view_asset_list::all();
-        return view('home.index')->with('asset',$data);
+        // $data = view_asset_list::all();
+        // return view('home.index')->with('vasset',$data);
     }
 }

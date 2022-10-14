@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class view_build_list extends Model
 {
     // use HasFactory;
-    public $table = "view_build_list";
+    // public $table = "view_build_list";
 }

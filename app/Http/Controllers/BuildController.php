@@ -9,7 +9,8 @@ class BuildController extends Controller
 {
     public function index()
     {
-        return view('home.build');
+        $data = Build::all();
+        return view('home.build')->with('build',$data);
     }
 
     public function store(Request $request)
@@ -33,6 +34,48 @@ class BuildController extends Controller
         $build->save();
 
         return redirect('/build')->with('success', 'Build Saved');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'build_name' => 'required',
+            'serial' => 'required',
+            'details' => 'required',
+            'status_id' => 'required',
+            'dept_id' => 'required',
+            'updated_at' => 'required'
+        ]);
+
+        $build = Build::find($id);
+
+        $build->build_name = $request->input('build_name');
+        $build->serial = $request->input('serial');
+        $build->details = $request->input('details');
+        $build->status_id = $request->input('status_id');
+        $build->dept_id = $request->input('dept_id');
+
+        $build->save();
+        $fetchedBuild = Build::find($build->id);
+        var_dump($fetchedBuild);
+
+        return redirect('/build')->with('success', 'Build Updated');
+    }
+
+    public function show($id)
+    {
+        //
+    }
+
+
+    public function destroy($id)
+    {
+
+        $build = build::find($id);
+        $build->delete();
+
+        return redirect('/build')->with('success','Data deleted');
+
     }
 
 }
