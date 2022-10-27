@@ -7,11 +7,11 @@ use App\Models\view_asset_list;
 
 class AssetViewController extends Controller
 {
-    public function show()
+    public function index()
     {
-        // $data = AssetView::all();
-        // return view('index',['assetData'=>$data]);
-        // $data = view_asset_list::all();
-        // return view('home.index')->with('vasset',$data);
+        $assetview = view_asset_list::all();
+
+
+        return view('home.build')->with('assetview',$assetview);
     }
 }

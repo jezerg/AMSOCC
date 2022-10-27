@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Assets;
 use App\Models\Build;
 use App\Models\Dept;
+use App\Models\BuildComp;
 use App\Models\GuestView;
 use App\Models\view_asset_list;
 use App\Models\view_build_list;
@@ -15,6 +16,9 @@ use App\Http\Controllers\AssetViewController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BuildViewController;
 use App\Http\Controllers\DeptViewController;
+use App\Http\Controllers\AssetDelController;
+use App\Http\Controllers\BuildCompController;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +43,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/build', 'BuildController@index')->name('home.build');
     Route::get('/department', 'DepartmentController@index')->name('home.department');
     Route::get('/about', 'AboutController@index')->name('home.about');
+    Route::get('/reports', 'ReportController@index')->name('home.reports');
 
 
     Route::group(['middleware' => ['guest']], function() {
@@ -63,10 +68,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         // Route::get('/asset','AssetController@index')->name('asset');
         Route::get('/build','BuildController@index')->name('build');
         Route::get('/department','DepartmentController@index')->name('Department');
+        Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
 
         Route::resource('/asset',AssetController::class);
         Route::resource('/build',BuildController::class);
         Route::resource('/department',DepartmentController::class);
+        // Route::resource('/build',AssetViewController::class);
+        Route::get('users/export/', [AssetController::class, 'export']);
 
         /**
          *
@@ -80,7 +88,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/register', 'RegisterController@show')->name('register.show');
         Route::post('/register', 'RegisterController@register')->name('register.perform');
 
-
+        Route::get('/articles',[AssetDelController::class,"showArticle"]);
+        Route::get('/delete-article',[AssetDelController::class,"deleteArticle"]);
 
 
 

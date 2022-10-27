@@ -1,11 +1,31 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="bg-light p-5 rounded">
+    <div class="body bg-light p-5 rounded">
         @auth
 
         <h2>OCC Assets Management System</h2>
-
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img src="{!! url('images/occ slide.png') !!}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="{!! url('images/occ slide 2.png') !!}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+            <img src="{!! url('images/occ slide 3.png') !!}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
         @endauth
 

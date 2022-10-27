@@ -1,14 +1,16 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="bg-light p-5 rounded">
+    <div class="body bg-light p-5 rounded">
         @auth
         <h2>OCC Assets Management System</h2>
         <h3>PC Build List</h3>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Add Build
+            Create Build
         </button>
+        <a href="#" class="btn btn-success">Export to PDF</a>
+        <a href="#" class="btn btn-info">Export to XLS</a>
 
         <!-- Start Add Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -142,7 +144,7 @@
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save Data</button>
+        <button type="submit" class="btn btn-primary">Update Build</button>
         </div>
         </form>
         </div>
@@ -152,7 +154,7 @@
 
         <br><br>
 
-        <table id="datatable" class="table table-dark table-hover" style="width:100%">
+        <table id="datatable" class="table table-hover table-sm" style="width:100%">
           <thead>
             <tr>
                 <th scope="col"> ID </th>
@@ -174,14 +176,17 @@
                 <td>{{$build['status_id']}}</td>
                 <td>{{$build['dept_id']}}</td>
                 <td>
-                    <a href="#" class="btn btn-success edit btn-sm">EDIT</a>
-                    <a href="#" class="btn btn-danger delete btn-sm">DELETE</a>
-                    <a href="#" class="btn btn-info view btn-sm">VIEW</a>
+                    <a href="#" class="btn btn-warning edit btn-sm">Edit</a>
+                    <a href="#" class="btn btn-danger delete btn-sm">Delete</a>
+                    <a href="#" class="btn btn-info view btn-sm">Add Components</a>
+                    <a href="#" class="btn btn-primary view btn-sm">View</a>
+                    <!-- <a href="/buildcomp" class="btn btn-success view btn-sm">Add Components</a> -->
                 </td>
             </tr>
             @endforeach
             </tbody>
             </table>
+
 
         @endauth
 

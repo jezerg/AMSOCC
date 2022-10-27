@@ -34,18 +34,18 @@ class DepartmentController extends Controller
     {
         $this->validate($request,[
             'dept_name' => 'required',
-            'details' => 'required',
-            'updated_at' => 'required'
+            'details' => 'required'
+
         ]);
 
-        $dept = Dept::find($id);
+        $dept = dept::find($id);
 
         $dept->dept_name = $request->input('dept_name');
         $dept->details = $request->input('details');
 
         $dept->save();
 
-        return redirect('/deprtment')->with('success', 'Department Saved');
+        return redirect('/department')->with('success', 'Department Saved');
     }
 
     public function show($id)

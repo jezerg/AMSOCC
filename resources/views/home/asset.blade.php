@@ -1,7 +1,7 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="bg-light p-5 rounded">
+    <div class="body bg-light p-5 rounded">
         @auth
 
         <h2>OCC Assets Management System</h2>
@@ -10,6 +10,8 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Add Asset
         </button>
+        <a href="generate-pdf" class="btn btn-success">Export to PDF</a>
+        <a href="{{url('users/export/')}}" class="btn btn-info">Export to XLS</a>
 
         <!--  Adding Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -55,13 +57,14 @@
                     <option value="1">Active</option>
                     <option value="2">Serviceable</option>
                     <option value="3">Unserviceable</option>
+                    <option value="4">Spare</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label>Quantity</label>
                     <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity" required="required">
                 </div>
-                <div class="input-group mb-3">
+                <!-- <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     <label class="input-group-text" for="build_id">Build</label>
                     </div>
@@ -83,7 +86,7 @@
                     <option value="3">Registrar</option>
                     <option value="4">Library</option>
                     </select>
-                </div>
+                </div> -->
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -140,13 +143,14 @@
                     <option value="1">Active</option>
                     <option value="2">Serviceable</option>
                     <option value="3">Unserviceable</option>
+                    <option value="4">Spare</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label>Quantity</label>
                     <input type="text" name="quantity" id="quantity" class="form-control" required="required">
                 </div>
-                <div class="input-group mb-3">
+                <!-- <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     <label class="input-group-text" for="build_id">Build</label>
                     </div>
@@ -168,7 +172,7 @@
                     <option value="3">Registrar</option>
                     <option value="4">Library</option>
                     </select>
-                </div>
+                </div> -->
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -181,7 +185,7 @@
         <!-- End edit Modal -->
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModalasset" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="deleteModalasset" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -194,21 +198,23 @@
         <div class="modal-body">
         @include('layouts.partials.messages')
             <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <p> Are You Sure ?... You want to Delete this Asset </p>
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">Delete Asset</button>
+        <button type="submit" class="btn btn-primary">Delete Asset</button>
         </div>
         </form>
         </div>
         </div>
-        </div>
+        </div> -->
         <!-- End Delete Modal -->
         <br><br>
 
 
-        <table id="datatable" class="table table-dark table-hover" style="width:100%">
+        <table id="datatable" class="table table-hover table-sm" style="width:100%">
           <thead>
             <tr>
                 <th scope="col"> ID </th>
@@ -236,9 +242,9 @@
                 <td>{{$assets['build_id']}}</td>
                 <td>{{$assets['dept_id']}}</td>
                 <td>
-                    <a href="#" class="btn btn-success edit btn-sm">EDIT</a>
-                    <a href="#" class="btn btn-danger delete btn-sm">DELETE</a>
-                    <a href="#" class="btn btn-info view btn-sm">VIEW</a>
+                    <a href="#" class="btn btn-warning edit btn-sm">EDIT</a>
+                    <a href="{{url('delete-article?id='.$assets->id)}}" class="btn btn-danger btn-sm">DELETE</a>
+                    <a href="#" class="btn btn-primary view btn-sm">View</a>
                 </td>
             </tr>
             @endforeach
@@ -300,7 +306,7 @@
             </div>
             </div>
             <!-- End Modal -->
-
+</div>
         @endguest
 
 @endsection

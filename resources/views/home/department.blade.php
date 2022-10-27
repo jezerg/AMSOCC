@@ -1,7 +1,7 @@
 @extends('layouts.app-master')
 
 @section('content')
-    <div class="bg-light p-5 rounded">
+    <div class="body bg-light p-5 rounded">
         @auth
         <h2>OCC Assets Management System</h2>
         <h3>Department</h3>
@@ -99,7 +99,7 @@
         <!-- End Edit Modal -->
         <br><br>
 
-        <table id="datatable" class="table table-dark table-hover" style="width:100%">
+        <table id="datatable" class="table table-hover table-sm" style="width:100%">
           <thead>
             <tr>
                 <th scope="col"> ID </th>
@@ -117,7 +117,7 @@
                 <td>
                     <a href="#" class="btn btn-success edit btn-sm">EDIT</a>
                     <a href="#" class="btn btn-danger delete btn-sm">DELETE</a>
-                    <a href="#" class="btn btn-info view btn-sm">VIEW</a>
+                    <a href="#" class="btn btn-primary view btn-sm">VIEW</a>
                 </td>
             </tr>
             @endforeach

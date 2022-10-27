@@ -9,8 +9,8 @@ class BuildController extends Controller
 {
     public function index()
     {
-        $data = Build::all();
-        return view('home.build')->with('build',$data);
+        $build = Build::all();
+        return view('home.build')->with('build',$build);
     }
 
     public function store(Request $request)
@@ -43,11 +43,11 @@ class BuildController extends Controller
             'serial' => 'required',
             'details' => 'required',
             'status_id' => 'required',
-            'dept_id' => 'required',
-            'updated_at' => 'required'
+            'dept_id' => 'required'
+            // 'updated_at' => 'required'
         ]);
 
-        $build = Build::find($id);
+        $build = build::find($id);
 
         $build->build_name = $request->input('build_name');
         $build->serial = $request->input('serial');

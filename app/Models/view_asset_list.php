@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class view_asset_list extends Model
 {
-    // use HasFactory;
-    // public $table = "view_asset_list";
+    use HasFactory;
+    public $table = "view_report_list";
 
 }

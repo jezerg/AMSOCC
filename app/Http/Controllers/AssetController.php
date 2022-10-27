@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Assets;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AssetsExport;
 
 class AssetController extends Controller
 {
@@ -96,7 +98,7 @@ class AssetController extends Controller
             'dept_id' => 'required'
         ]);
 
-        $asset = Assets::find($id);
+        $asset = assets::find($id);
 
         $asset->name = $request->input('name');
         $asset->details = $request->input('details');
@@ -136,7 +138,36 @@ class AssetController extends Controller
         // $asset->delete();
 
         // return redirect('/asset')->with('success','Data deleted');
-        $id = $request->input('id');
-        Assets::find($id)->delete();
+        // $id = $request->input('id');
+        // Assets::find($id)->delete();
+
+        $asset::find($id)->delete();
+
+        // return redirect()->route('home.asset')
+        //     ->withSuccess(__('User deleted successfully.'));
+
+
     }
+
+
+     /**
+     *  Restore user data
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        User::where('id', $id)->withTrashed()->restore();
+
+        return redirect()->route('home.asset', ['status' => 'archived'])
+            ->withSuccess(__('User restored successfully.'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new AssetsExport, 'asset.xlsx');
+    }
+
 }
